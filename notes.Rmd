@@ -1,0 +1,147 @@
+---
+title: "Intro to R"
+output: html_notebook
+---
+
+```{r setup, include=FALSE, echo=FALSE}
+require("knitr")
+opts_knit$set(root.dir = "~/Desktop/af-werx/data")
+```
+
+# Setting directory
+```{r}
+setwd("~/Desktop/af-werx")
+```
+
+# Getting working directory
+```{r}
+getwd()
+```
+
+# Set our dirs
+```{r}
+main_dir = "~/Desktop/af-werx"
+data_dir = paste0(main_dir, "/data")
+plot_dir = paste0(main_dir, "/plots")
+setwd(data_dir)
+getwd()
+```
+
+# Read CSV
+```{r}
+temp_heart_rate = read.csv("temp_heart_rate.csv", header = T, stringsAsFactors = F)
+```
+
+# Structure of the Data
+```{r}
+str(temp_heart_rate)
+```
+
+
+# View the first rows of the Data
+```{r}
+head(temp_heart_rate)
+```
+
+# View the last rows of the data
+```{r}
+tail(temp_heart_rate)
+```
+
+
+# View the whole data
+```{r}
+View(temp_heart_rate)
+```
+
+# Writing data
+```{r}
+temp_heart_subset = temp_heart_rate[1:10,]
+write.csv(temp_heart_subset, "temp_heart_subset.csv", row.names = F)
+```
+
+# View objects that are in environment
+```{r}
+ls()
+```
+
+# Save environment
+```{r}
+save.image(file = "myenv.RData")
+```
+
+
+# Remove variable
+```{r}
+rm("temp_heart_rate")
+ls()
+```
+
+# Remove whole environment
+```{r}
+# if you don't want to use the broom
+rm(list=ls())
+```
+
+# Loading the Environment
+```{r}
+load("myenv.RData")
+```
+
+# CMP
+```{r}
+CMP = read.csv("ChemicalManufacturingProcess.csv", header=T, stringsAsFactors = F)
+str(CMP)
+```
+
+
+# View CMP Data
+```{r}
+View(CMP)
+```
+
+```{r}
+column_ids = c(1:4, 14:16)
+column_ids
+```
+
+# Create CMP Subset with the column_ids vector
+```{r}
+CMP_subset = CMP[,column_ids]
+str(CMP_subset)
+```
+
+```{r}
+summary(CMP_subset)
+
+```
+
+# Getting Max
+# ignore NA in column with na.rm=T
+```{r}
+maxprocess01 = max(CMP_subset$ManufacturingProcess01, na.rm = T)
+maxprocess01
+```
+
+# Check NAs is Manufacturing Process 01
+```{r}
+is_na = is.na(CMP_subset$ManufacturingProcess01)
+```
+
+```{r}
+View(CMP_subset)
+```
+
+# which
+```{r}
+which(is_na)
+```
+
+
+
+
+
+
+
+
+
